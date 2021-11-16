@@ -1,100 +1,89 @@
 package student
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
 	"strings"
 )
 
-func Err(Str string, Status int, w http.ResponseWriter, r *http.Request) {
-
-	Info := Error{Str, Status}
-	val, err := template.ParseFiles("templates/err.html")
-
-	if err != nil {
-		Err("500 Internal Server Error", http.StatusInternalServerError, w, r)
-		return
-	}
-	w.WriteHeader(Status)
-	err = val.Execute(w, Info)
-	if err != nil {
-		fmt.Fprintf(w, err.Error())
-		return
-	}
-}
-
-func Media(w http.ResponseWriter, r *http.Request) {
-
-	if !Result {
-		Err("500 Internal Server Error", http.StatusInternalServerError, w, r)
-		return
-	}
+// "MainPage": Handles page with info about all Artits
+func MainPage(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path != "/" && r.Method == "GET" {
-		Err("404 Not Found", http.StatusNotFound, w, r)
+		Err("404 Not Found", http.StatusNotFound, w)
 		return
 	}
 
 	if r.URL.Path == "/" && r.Method != "GET" {
-		Err("404 Not Found", http.StatusNotFound, w, r)
+		Err("405 Method Not Allowed", http.StatusMethodNotAllowed, w)
 		return
 	}
 
-	val, err := template.ParseFiles("templates/groupie.html")
+	htmlTemplate, err := template.ParseFiles("templates/groupie.html")
+
 	if err != nil {
-		Err("500 Internal Server Error", http.StatusInternalServerError, w, r)
+		Err("500 Internal Server Error", http.StatusInternalServerError, w)
 		return
 	}
 
-	err = val.Execute(w, ArtistsNew)
-	if err != nil {
-		fmt.Fprintf(w, err.Error())
-	}
+	GettingAPIData(w)
 
+	htmlTemplate.Execute(w, ArtistsInfo)
 }
 
-func Album(w http.ResponseWriter, r *http.Request) {
+// "ArtistPage": Handles page with precise data about Artists
+func ArtistPage(w http.ResponseWriter, r *http.Request) {
 
-	if r.URL.Path != "/artists/" && r.Method == "POST" {
-		Err("404 Not Found", http.StatusNotFound, w, r)
+	if len(r.URL.Path) < 10 || (r.URL.Path[:9] != "/artists/") {
+		Err("404 Not Found", http.StatusNotFound, w)
 		return
 	}
 
-	if r.Method != "POST" && r.URL.Path == "/ascii-art/" {
-		Err("405 Method Not Allowed", http.StatusMethodNotAllowed, w, r)
+	if r.Method != "GET" {
+		Err("405 Method Not Allowed", http.StatusMethodNotAllowed, w)
 		return
 	}
 
-	val, err := template.ParseFiles("templates/artist.html")
+	htmlTemplate, err := template.ParseFiles("templates/artist.html")
+
 	if err != nil {
-		Err("500 Internal Server Error", http.StatusInternalServerError, w, r)
+		Err("500 Internal Server Error", http.StatusInternalServerError, w)
 		return
 	}
-	name := strings.TrimPrefix(r.URL.Path, "/artists/")
-	id, smt := strconv.Atoi(name)
-	if smt != nil {
-		Err("404 Not Found", http.StatusNotFound, w, r)
-		return
-	}
-	if (len(RelationNew.Index) < id) || (id < 1) {
-		Err("404 Not Found", http.StatusNotFound, w, r)
-		return
-	}
-	ArtistsNew[id-1].DatesLocations = RelationNew.Index[id-1].DatesLocations
-	err = val.Execute(w, ArtistsNew[id-1])
+
+	ArtistID := strings.TrimPrefix(r.URL.Path, "/artists/")
+
+	ID, err := strconv.Atoi(ArtistID)
+
 	if err != nil {
-		Err("500 Internal Server Error", http.StatusInternalServerError, w, r)
+		Err("400 Bad Request", http.StatusBadRequest, w)
+		return
+	}
+
+	GettingAPIData(w)
+
+	if len(ArtistsInfo) < ID {
+		Err("404 Not Found", http.StatusNotFound, w)
+		return
+	} else if ID < 1 {
+		Err("400 Bad Request", http.StatusBadRequest, w)
+		return
+	}
+
+	err = htmlTemplate.Execute(w, ArtistsInfo[ID-1])
+
+	if err != nil {
+		Err("500 Internal Server Error", http.StatusInternalServerError, w)
 		return
 	}
 }
 
-func MainFunc() {
+// "MainHandler": Function for calling handle functions.
+func MainHandler() {
 	val := http.FileServer(http.Dir("style"))
 	http.Handle("/style/", http.StripPrefix("/style", val))
-	Func()
-	http.HandleFunc("/", Media)
-	http.HandleFunc("/artists/", Album)
+	http.HandleFunc("/", MainPage)
+	http.HandleFunc("/artists/", ArtistPage)
 	http.ListenAndServe(":7770", nil)
 }

@@ -1,5 +1,5 @@
 body {
-  background-image: url("black.jpg");
+  background-image: url("../images/black.jpg");
   background-color: azure;
 }
 
@@ -80,7 +80,7 @@ a:hover {
     margin-left: 0%;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.349);
-    font-size: 35px;
+    font-size: 55px;
     text-align: center;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   }
@@ -89,9 +89,34 @@ a:hover {
     padding: 25px;
     width: 250px;
     background-color: rgba(155, 152, 152, 0.614);
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
     margin: auto;
     margin-top: 50px;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .header {
+    margin-bottom: 0px;
+    margin-left: 0%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.349);
+    font-size: 35px;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    min-width: 160px;
+  }
+
+  .err {
+    padding: 15px;
+    width: auto;
+    /* max-width: 230px; */
+    background-color: rgba(155, 152, 152, 0.614);
+    font-size: 17px;
+    text-align: center;
+    margin: auto;
+    margin-top: 30px;
+    min-width: 150px;
   }
 }

@@ -1,12 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 body {
-  background-image: url("black.jpg");
+  background-image: url("../images/black.jpg");
   background-color: azure;
   color: antiquewhite;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   
 }
 
-@media only screen and (max-width: 15000px)  {
   .header {
     margin-bottom: 0px;
     margin-left: 0%;
@@ -14,6 +15,7 @@ body {
     background-color: rgba(255, 255, 255, 0.349);
     font-size: 100px;
     text-align: center;
+    border-radius: 8px;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   }
   
@@ -68,7 +70,7 @@ body {
   }
   .group_name {
     font-size: 30px;
-    background-color:  rgb(0, 0, 0, 0.4);
+    background-color:  rgb(0, 0, 0, 0.0);
     padding: 8px;
     border-radius: 5px;
     color: seashell;
@@ -113,7 +115,6 @@ body {
     color: seashell;
     text-transform: capitalize;
   }
-}
 
 @media only screen and (max-width: 1500px)  {
   .header {
@@ -138,7 +139,7 @@ body {
   
   .picture {
     background-color: initial;
-    width: 220px;
+    width: 250px;
     border-radius: 15px;
     box-shadow: 0px 0px 15px rgb(10, 10, 10);
     margin: auto;
@@ -176,8 +177,117 @@ body {
     margin-top: 20px;
   }
   .group_name {
-    font-size: 20px;
+    font-size: 28px;
+    background-color:  rgb(0, 0, 0, 0.0);
+    padding: 8px;
+    border-radius: 5px;
+    color: seashell;
+    text-transform: uppercase;
+    text-shadow: seashell;
+  }
+  
+  .members_container{
+    padding: 8px;
+    background-color: rgb(0, 0, 0, 0.4);
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .members{
+    font-size: 15px;
+    padding: 2px;
+    color: seashell;
+    text-transform: uppercase;
+  }
+  
+  .group_members_container{
+    margin-top: 10px;
+  }
+  
+  .group_members{
+    font-size: 22px;
     background-color:  rgb(0, 0, 0, 0.4);
+    padding: 8px;
+    border-radius: 5px;
+    color: seashell;
+    text-transform: capitalize;
+    text-shadow: seashell;
+  }
+  
+  .creation{
+    font-size: 22px;
+    background-color:  rgb(0, 0, 0, 0.4);
+    padding: 8px;
+    border-radius: 5px;
+    color: seashell;
+    text-transform: capitalize;
+  }
+}
+
+@media only screen and (max-width: 800px)  {
+  .header {
+    margin-bottom: 0px;
+    margin-left: 0%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.349);
+    font-size: 35px;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  }
+  
+  .container {
+    border-radius: 15px;
+    max-width: 290px;
+    /* max-height: 2000px; */
+    margin: 0px auto;
+    margin-top: 25px;
+    text-align: center;
+    background: linear-gradient(white, grey,black) ;
+  }
+  
+  .picture {
+    background-color: initial;
+    width: 200px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgb(10, 10, 10);
+    margin: auto;
+  }
+  .picture:hover{
+    transform: perspective(50px);
+  }
+  
+  a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    background: linear-gradient(to right, white, grey 50%, black 40%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 275ms ease;
+  }
+  
+  a:hover{
+    background-position: 0 100%;
+  }
+  
+  .info {
+    margin: 20px auto;
+    padding: 20px;
+    overflow: auto;
+    justify-content: center;
+  }
+  
+  .group_name_container{
+    margin-top: 20px;
+  }
+  .group_name {
+    font-size: 25px;
+    background-color:  rgb(0, 0, 0, 0.0);
     padding: 8px;
     border-radius: 5px;
     color: seashell;
@@ -205,7 +315,7 @@ body {
   }
   
   .group_members{
-    font-size: 18px;
+    font-size: 19px;
     background-color:  rgb(0, 0, 0, 0.4);
     padding: 8px;
     border-radius: 5px;
@@ -215,7 +325,7 @@ body {
   }
   
   .creation{
-    font-size: 18px;
+    font-size: 19px;
     background-color:  rgb(0, 0, 0, 0.4);
     padding: 8px;
     border-radius: 5px;
@@ -224,13 +334,16 @@ body {
   }
 }
 
-@media only screen and (max-width: 800px)  {
+@media only screen and (max-width: 470px)  {
+  body{
+    min-width: 155px;
+  }
   .header {
     margin-bottom: 0px;
     margin-left: 0%;
-    padding: 20px;
+    padding: 10px;
     background-color: rgba(255, 255, 255, 0.349);
-    font-size: 35px;
+    font-size: 25px;
     text-align: center;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   }
@@ -238,16 +351,16 @@ body {
   .container {
     border-radius: 15px;
     max-width: 250px;
-    /* max-height: 2000px; */
+    width: auto;
     margin: 0px auto;
-    margin-top: 25px;
+    margin-top: 3px;
     text-align: center;
     background: linear-gradient(white, grey,black) ;
   }
   
   .picture {
     background-color: initial;
-    width: 170px;
+    width: 150px;
     border-radius: 15px;
     box-shadow: 0px 0px 15px rgb(10, 10, 10);
     margin: auto;
@@ -282,11 +395,11 @@ body {
   }
   
   .group_name_container{
-    margin-top: 20px;
+    margin-top: 9px;
   }
   .group_name {
-    font-size: 18px;
-    background-color:  rgb(0, 0, 0, 0.4);
+    font-size: 20px;
+    background-color:  rgb(0, 0, 0, 0.0);
     padding: 8px;
     border-radius: 5px;
     color: seashell;
@@ -299,18 +412,18 @@ body {
     background-color: rgb(0, 0, 0, 0.4);
     border-radius: 5px;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 5px;
   }
   
   .members{
-    font-size: 9px;
+    font-size: 11.5px;
     padding: 2px;
     color: seashell;
     text-transform: uppercase;
   }
   
   .group_members_container{
-    margin-top: 10px;
+    margin-top: 3px;
   }
   
   .group_members{
@@ -324,7 +437,7 @@ body {
   }
   
   .creation{
-    font-size: 15px;
+    font-size: 13px;
     background-color:  rgb(0, 0, 0, 0.4);
     padding: 8px;
     border-radius: 5px;
@@ -332,3 +445,4 @@ body {
     text-transform: capitalize;
   }
 }
+

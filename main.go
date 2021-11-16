@@ -7,5 +7,5 @@ import (
 
 func main() {
 	fmt.Println("http://localhost:7770/ is listening...")
-	student.MainFunc()
+	student.MainHandler()
 }
